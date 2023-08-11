@@ -1,5 +1,5 @@
-from flask import Flask, request, render_template
-
+from flask import Flask, request, render_template, jsonify
+import json
 app= Flask(__name__)
 
 @app.route('/')
@@ -12,15 +12,15 @@ def math_operator():
     number1= request.json["number1"]
     number2=request.json["number2"]
 
-    if operation== add:
-        result= number1+number2
-    elif operation== multiply:
-        result= number1*number2
-    elif operation== divide:
-        result= number1/number2
+    if operation=="add":
+        result= int(number1)+int(number2)
+    elif operation== "multiply":
+        result= int(number1)*int(number2)
+    elif operation== "divide":
+        result= int(number1)/int(number2)
     else:
-        result= number1-number2
-    return result
+        result= int(number1)-int(number2)
+    return jsonify(result) 
 
 print(__name__)
 
